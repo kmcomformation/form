@@ -482,16 +482,16 @@
             </div>
           </div>
 
-         //--- <div class="field">---
-           //--- <label for="heure">Heure souhaitée <span class="req">*</span></label>
-           //--- <select id="heure" name="heure">
-             //--- <option value="">Choisir…</option>
-             //--- <option value="À partir de 8h">À partir de 8h</option>
-            //---  <option value="À partir de 12h">À partir de 12h</option>
-            //---  <option value="À partir de 18h">À partir de 18h</option>
-         //---   </select>
-          //---  <span class="error-msg">Veuillez choisir un créneau horaire.</span>
-        //---  </div>
+          <div class="field">---
+            <label for="heure">Heure souhaitée <span class="req">*</span></label>
+            <select id="heure" name="heure">
+             <option value="">Choisir…</option>
+              <option value="À partir de 8h">À partir de 8h</option>
+             <option value="À partir de 12h">À partir de 12h</option>
+             <option value="À partir de 18h">À partir de 18h</option>
+          </select>
+           <span class="error-msg">Veuillez choisir un créneau horaire.</span>
+         </div>
 
           <div class="field" id="ordinateurField">
             <label>Avez-vous un ordinateur ? <span class="req">*</span></label>
@@ -570,7 +570,7 @@
       {el: document.getElementById('contact'), check: function(v){return v.replace(/[^0-9+]/g,'').length >= 7;}},
       {el: document.getElementById('profession'), check: function(v){return v !== '';}},
       {el: document.getElementById('formation'), check: function(v){return v !== '';}},
-     //--- {el: document.getElementById('heure'), check: function(v){return v !== '';}}
+      {el: document.getElementById('heure'), check: function(v){return v !== '';}}
     ];
     required.forEach(function(item){
       var wrap = fieldOf(item.el);
