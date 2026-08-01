@@ -482,6 +482,7 @@
             </div>
           </div>
 
+          <!--
           <div class="field">---
             <label for="heure">Heure souhaitée <span class="req">*</span></label>
             <select id="heure" name="heure">
@@ -492,7 +493,7 @@
           </select>
            <span class="error-msg">Veuillez choisir un créneau horaire.</span>
          </div>
-
+-->
           <div class="field" id="ordinateurField">
             <label>Avez-vous un ordinateur ? <span class="req">*</span></label>
             <div class="toggle-group" role="radiogroup" aria-label="Avez-vous un ordinateur ?">
@@ -570,7 +571,7 @@
       {el: document.getElementById('contact'), check: function(v){return v.replace(/[^0-9+]/g,'').length >= 7;}},
       {el: document.getElementById('profession'), check: function(v){return v !== '';}},
       {el: document.getElementById('formation'), check: function(v){return v !== '';}},
-      {el: document.getElementById('heure'), check: function(v){return v !== '';}}
+    // {el: document.getElementById('heure'), check: function(v){return v !== '';}}
     ];
     required.forEach(function(item){
       var wrap = fieldOf(item.el);
@@ -595,7 +596,7 @@
     return ok;
   }
 
-  ['nom','contact','profession','formation','heure'].forEach(function(id){
+  ['nom','contact','profession','formation'].forEach(function(id){
     var el = document.getElementById(id);
     el.addEventListener('input', function(){ fieldOf(el).classList.remove('invalid'); });
     el.addEventListener('change', function(){ fieldOf(el).classList.remove('invalid'); });
