@@ -167,7 +167,6 @@
     outline:none;
     transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
     width:100%;
-   
   }
   .field textarea{resize:vertical;min-height:78px;font-family:'Inter',sans-serif;}
 
@@ -208,60 +207,6 @@
     background-repeat:no-repeat;
     background-position:right 14px center;
     padding-right:36px;
-  }
-
-  /* SEGMENTED TOGGLE (Oui / Non) */
-  .toggle-group{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-  .toggle-option{
-    position:relative;
-  }
-  .toggle-option input{
-    position:absolute;
-    opacity:0;
-    width:100%;
-    height:100%;
-    margin:0;
-    cursor:pointer;
-  }
-  .toggle-option .toggle-card{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    border:1.5px solid #E1E7EC;
-    background:#FBFCFD;
-    border-radius:var(--radius-sm);
-    padding:13px 14px;
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--gray);
-    transition:border-color .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
-    user-select:none;
-  }
-  .toggle-option .toggle-card .dot{
-    width:8px;height:8px;border-radius:50%;
-    background:#D7DEE4;
-    transition:background .18s ease;
-  }
-  .toggle-option input:checked + .toggle-card{
-    border-color:var(--teal);
-    background:rgba(38,182,147,0.08);
-    color:var(--teal-dark);
-    box-shadow:0 0 0 4px rgba(38,182,147,0.10);
-  }
-  .toggle-option input:checked + .toggle-card .dot{
-    background:var(--teal);
-  }
-  .toggle-option input:focus-visible + .toggle-card{
-    outline:2px solid var(--teal);
-    outline-offset:2px;
-  }
-  .field.invalid .toggle-card{
-    border-color:var(--danger);
   }
 
   .submit-btn{
@@ -412,7 +357,6 @@
     .head h1{font-size:18.5px;}
     .body-pad{padding:24px 18px 26px;}
     .row2{grid-template-columns:1fr;}
-    .toggle-group{grid-template-columns:1fr 1fr;}
     .success-actions{flex-direction:column;width:100%;}
     .success-actions .btn{width:100%;justify-content:center;}
   }
@@ -482,22 +426,6 @@
             </div>
           </div>
 
-      
-          <div class="field" id="ordinateurField">
-            <label>Avez-vous un ordinateur ? <span class="req">*</span></label>
-            <div class="toggle-group" role="radiogroup" aria-label="Avez-vous un ordinateur ?">
-              <label class="toggle-option">
-                <input type="radio" name="ordinateur" value="Oui">
-                <span class="toggle-card"><span class="dot"></span> Oui</span>
-              </label>
-              <label class="toggle-option">
-                <input type="radio" name="ordinateur" value="Non">
-                <span class="toggle-card"><span class="dot"></span> Non</span>
-              </label>
-            </div>
-            <span class="error-msg">Veuillez indiquer si vous avez un ordinateur.</span>
-          </div>
-
           <div class="field">
             <label for="commentaire">Commentaire</label>
             <textarea id="commentaire" name="commentaire" placeholder="Une question, une précision à ajouter ? (facultatif)"></textarea>
@@ -519,7 +447,7 @@
           </svg>
         </div>
         <h3>Inscription bien reçue !</h3>
-        <p>Merci <span id="successName"></span>votre demande a été enregistrée. Notre équipe vous recontactera très bientôt pour confirmer votre créneau.</p>
+        <p>Merci <span id="successName"></span>votre demande a été enregistrée. Notre équipe vous recontactera très bientôt.</p>
         <div class="success-actions">
           <a class="btn btn-whatsapp" id="waLink" href="#" target="_blank" rel="noopener">💬 Nous écrire sur WhatsApp</a>
           <button class="btn btn-ghost" id="backBtn" type="button">← Nouvelle inscription</button>
@@ -559,8 +487,7 @@
       {el: document.getElementById('nom'), check: function(v){return v.trim().length >= 2;}},
       {el: document.getElementById('contact'), check: function(v){return v.replace(/[^0-9+]/g,'').length >= 7;}},
       {el: document.getElementById('profession'), check: function(v){return v !== '';}},
-      {el: document.getElementById('formation'), check: function(v){return v !== '';}},
-    
+      {el: document.getElementById('formation'), check: function(v){return v !== '';}}
     ];
     required.forEach(function(item){
       var wrap = fieldOf(item.el);
@@ -572,16 +499,6 @@
       }
     });
 
-    // Champ "ordinateur" (radio group)
-    var ordinateurChecked = form.querySelector('input[name="ordinateur"]:checked');
-    var ordinateurWrap = document.getElementById('ordinateurField');
-    if(!ordinateurChecked){
-      ordinateurWrap.classList.add('invalid');
-      ok = false;
-    } else {
-      ordinateurWrap.classList.remove('invalid');
-    }
-
     return ok;
   }
 
@@ -589,9 +506,6 @@
     var el = document.getElementById(id);
     el.addEventListener('input', function(){ fieldOf(el).classList.remove('invalid'); });
     el.addEventListener('change', function(){ fieldOf(el).classList.remove('invalid'); });
-  });
-  form.querySelectorAll('input[name="ordinateur"]').forEach(function(el){
-    el.addEventListener('change', function(){ document.getElementById('ordinateurField').classList.remove('invalid'); });
   });
 
   iframe.addEventListener('load', function(){
@@ -639,7 +553,7 @@
     successName.textContent = nameVal ? (nameVal + ', ') : '';
 
     var msg = encodeURIComponent(
-      "Bonjour ComFormation, je viens de m'inscrire (" + nameVal + ") pour la formation souhaitée. Pouvez-vous me confirmer mon créneau ?"
+      "Hello ComFormation, je viens de m'inscrire (" + nameVal + ") pour la formation souhaitée. Merci de confirmer mon inscription"
     );
     waLink.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + msg;
 
