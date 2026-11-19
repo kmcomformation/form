@@ -549,12 +549,13 @@
     submitBtn.classList.remove('loading');
     submitBtn.removeAttribute('disabled');
 
-    var nameVal = document.getElementById('nom').value.trim();
-    successName.textContent = nameVal ? (nameVal + ', ') : '';
+   var nameVal = document.getElementById('nom').value.trim();
+var formationVal = document.getElementById('formation').value;
+successName.textContent = nameVal ? (nameVal + ', ') : '';
 
-    var msg = encodeURIComponent(
-      "Hello ComFormation, je viens de m'inscrire (" + nameVal + ") pour la formation souhaitée. Merci de confirmer mon inscription"
-    );
+var msg = encodeURIComponent(
+  "Hello ComFormation, je viens de m'inscrire (" + nameVal + ") pour la formation « " + formationVal + " ». Merci de confirmer et valider mon inscription."
+);
     waLink.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + msg;
 
     formView.style.display = 'none';
